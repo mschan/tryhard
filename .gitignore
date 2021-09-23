@@ -1,7 +1,54 @@
-/a.out
-/largest_palindrome_substring
-/minimum_denomiations
-/palindrome_number
-/palindrome_number.dSYM
-/single_appearance
-/tempCodeRunnerFile
+### Linux ###
+*~
+*.bak
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### Vim ###
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+# auto-generated tag files
+tags
+#compilation database
+compile_commands.json
+#eclipse
+.cproject
+.project/
+.settings/
+#python compiled files
+*.pyc
+
+#object directories
+obj-*/
+*dSYM/
+
+#baas compilation logs
+log/
+
+#visual studio
+.vscode/
+._*
+.clangd/
+#doxygen
+doxydoc
+Doxyfile
+
+*DS_Store
+node_modules
