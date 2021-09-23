@@ -21,26 +21,27 @@ public:
     }
     
     bool isPalindrome_cached(string s, size_t start, size_t len) {
-        cout << boolalpha <<  s.substr(start, len);
+       // cout << boolalpha <<  s.substr(start, len);
         if (len == 2) {
-            cout << boolalpha << "\t" << (s[start] == s[start + 1]) << endl;
+       //     cout << boolalpha << "\t" << (s[start] == s[start + 1]) << endl;
             return (s[start] == s[start + 1]);
         } else  if (len == 3) {
-            cout << boolalpha << "\t" << (s[start] == s[start + 2]) << endl;
+       //     cout << boolalpha << "\t" << (s[start] == s[start + 2]) << endl;
             return s[start] == s[start + 2];
         }
         if (palindromeMap.end() != palindromeMap.find({start + 1, len - 2})) {
             if (s[start] == s[start + len]) {
-                cout << boolalpha << "\t" << true << endl;
+           //     cout << boolalpha << "\t" << true << endl;
                 return true;
             }
         }
         
-        cout << boolalpha << "\t" << false << endl;
+       // cout << boolalpha << "\t" << false << endl;
         return false;
     }
     
     int countSubstrings(string s) {
+        palindromeMap.clear();
         size_t c = s.size(); // Single letters are always palindrome.
         size_t letterCount = 2;
         const size_t size = s.size();
@@ -53,12 +54,18 @@ public:
                 }
             }
         }
-        return c + palindromeMap.size();
+        auto total = c + palindromeMap.size();
+        palindromeMap.clear();
+        assert(0 == palindromeMap.size());
+        return total;
     }
 };
 
 int main(int argc, const char * argv[]) {
     Solution sol;
     // cout << std::numeric_limits<int>::max() << endl;
-    cout<< sol.countSubstrings("abc") << endl;
+    std::vector<string> inputs{"abc", "aaa", "baas", "abc"};
+    for (auto& s : inputs) {
+        cout << s << " : " << sol.countSubstrings(s) << endl;
+    }
 }
