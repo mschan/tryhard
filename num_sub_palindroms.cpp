@@ -5,7 +5,12 @@
 #include <vector>
 #include <map>
 
+#define LOGEnable(x) x
+// #define LOGEnable(x) 
+
 using namespace std;
+
+#if 0
 class Solution {
 public:
     using Pos = pair<size_t, size_t>;
@@ -21,22 +26,24 @@ public:
     }
     
     bool isPalindrome_cached(string s, size_t start, size_t len) {
-       // cout << boolalpha <<  s.substr(start, len);
+       LOGEnable(cout << boolalpha <<  s.substr(start, len)) << " " << start << " " << len;
         if (len == 2) {
-       //     cout << boolalpha << "\t" << (s[start] == s[start + 1]) << endl;
+       LOGEnable(cout << boolalpha << "\t" << (s[start] == s[start + 1]) << endl);
             return (s[start] == s[start + 1]);
         } else  if (len == 3) {
-       //     cout << boolalpha << "\t" << (s[start] == s[start + 2]) << endl;
+       LOGEnable(cout << boolalpha << "\t" << (s[start] == s[start + 2]) << endl);
             return s[start] == s[start + 2];
         }
         if (palindromeMap.end() != palindromeMap.find({start + 1, len - 2})) {
-            if (s[start] == s[start + len]) {
-           //     cout << boolalpha << "\t" << true << endl;
+            if (s[start] == s[start + len - 1]) {
+                LOGEnable(cout << boolalpha << "\t" << true << endl);
                 return true;
             }
+        } else {
+            cout << s.substr(start + 1, len - 2) << "is not palindrome";
         }
         
-       // cout << boolalpha << "\t" << false << endl;
+       LOGEnable(cout << boolalpha << "\t" << false << endl);
         return false;
     }
     
@@ -60,11 +67,37 @@ public:
         return total;
     }
 };
+#else
+class Solution {
+    public:
+     int countSubstrings(string s) {
+        const size_t size = s.size();
+        bool dp[size][size] = {0};
+        size_t count = 0;
 
+        // dp[i][j] represents if s.substr(i, j-i) is palindrome
+        dp[0][0] = true;
+        for (int i=1; i<size; i++) {
+            dp[i][i] = true;
+            dp[i-1][i] =  (s[i-1] == s[i]);
+        }
+
+        for (size_t letterCount = 3; letterCount <= size; letterCount++) {
+            for (size_t i = 0; i <= size - letterCount; i++) {
+                dp[i][i+letterCount] = dp[]
+            }
+        }
+
+        return count;
+     }
+};
+#endif
 int main(int argc, const char * argv[]) {
     Solution sol;
     // cout << std::numeric_limits<int>::max() << endl;
-    std::vector<string> inputs{"abc", "aaa", "baas", "abc"};
+    // std::vector<string> inputs{"abc", "aaa", "baas", "abc", "aaaaa"};
+    std::vector<string> inputs{"aaaaa"};
+
     for (auto& s : inputs) {
         cout << s << " : " << sol.countSubstrings(s) << endl;
     }
