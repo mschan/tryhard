@@ -35,6 +35,7 @@ public:
             current_water = 0;
             for (size_t i = height.size() - 2; i > big_height_pos; i--) {
                 if (height[i] > big_height) {
+                    
                     total_water += current_water;
                     big_height = height[i];
                     current_water = 0;
